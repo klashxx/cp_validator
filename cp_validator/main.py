@@ -7,7 +7,8 @@ from __future__ import print_function
 
 from docopt import docopt, DocoptExit
 from schema import Schema, SchemaError
-from cp_validator.lib.extractor import get_postal
+from cp_validator.lib.controlador import main
+
 
 def cli():
     cli_docs = """cp_validator™ ... validación de códigos postales.
@@ -30,9 +31,14 @@ Options:
         raise DocoptExit
 
     try:
-        print(args['<codigo>'])
+        response = main(args['<codigo>'])
     except Exception as error:
         raise DocoptExit('falla cp_validator: {0}'.format(str(error)))
+
+    if response is None:
+        print('No se han encontrado resultados')
+    else:
+        print(response)
 
     return None
 
