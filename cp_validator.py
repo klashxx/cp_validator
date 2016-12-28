@@ -62,10 +62,43 @@ def load_vias():
     return vias
 
 
+def load_postal():
+    """Carga la información relativa a CP"""
+
+    postal = {}
+
+    with open(POSTAL_FILE) as postal_handler:
+        for line in postal_handler:
+            post = {'id_registro': line[:8],
+                    'cod_localidad': line[8:12],
+                    'cod_municipio': line[13:18],
+                    'cod_ine': line[13:29],
+                    'cod_via': line[29:32],
+                    'nombre_via': line[32:111],
+                    'impar_inferior': line[111:115],
+                    'inf_impar_inferior': line[115:118],
+                    'impar_superior': line[118:122],
+                    'inf_impar_superior': line[122:125],
+                    'par_inferior': line[125:129],
+                    'inf_par_inferior': line[129:132],
+                    'par_superior': line[132:136],
+                    'inf_par_superior': line[136:139],
+                    'estado': line[144:145].rstrip()}
+
+            cod_postal = line[139:144]
+
+            if cod_postal not in postal:
+                postal[cod_postal] = [post]
+            else:
+                postal[cod_postal].append(post)
+
+    return postal
+
 def main():
     """Controlador"""
     cius = load_cius()
     vias = load_vias()
+    postal = load_postal()
 
     return None
 
