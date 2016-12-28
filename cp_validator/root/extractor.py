@@ -66,6 +66,10 @@ def get_postal():
     with open(POSTAL_FILE) as postal_handler:
         for reg in postal_handler:
 
+            cod_postal = reg[139:144].rstrip()
+            if cod_postal == '':
+                continue
+
             cod_via = reg[29:32].rstrip()
             cod_via = 'CAL' if not cod_via else cod_via
             try:
@@ -104,7 +108,6 @@ def get_postal():
                                          else reg[136:139].rstrip()),
                     'estado': reg[144:145].rstrip()}
 
-            cod_postal = reg[139:144]
             if cod_postal not in postal:
                 postal[cod_postal] = [post]
             else:
