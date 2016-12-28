@@ -39,20 +39,35 @@ POSTAL_FILE = '{0}/POSTAL-t_0.txt'.format(DIR_FILES)
 VIA_FILE = '{0}/CODVIA_0.txt'.format(DIR_FILES)
 CIU_FILE = '{0}/CODCIU_0.txt'.format(DIR_FILES)
 
-def load_ciu():
+def load_cius():
     """Carga la información relativa a localidad"""
+
     cius = {}
+
     with open(CIU_FILE) as ciu_handler:
         for line in ciu_handler:
-            cod_localidad = line[:4]
-            nombre_localidad = line[4:54].rstrip()
-            cius[cod_localidad] = nombre_localidad
+            cius[line[:4]] = line[4:54].rstrip()
 
     return cius
 
+def load_vias():
+    """Carga la información relativa a vias"""
+
+    vias = {}
+
+    with open(VIA_FILE) as via_handler:
+        for line in via_handler:
+            vias[line[:3]] = line[3:23].rstrip()
+
+    return vias
+
+
 def main():
     """Controlador"""
-    cius = load_ciu()
+    cius = load_cius()
+    vias = load_vias()
+
+    return None
 
 
 if __name__ == '__main__':
