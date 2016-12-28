@@ -7,7 +7,7 @@ from __future__ import print_function
 
 from docopt import docopt, DocoptExit
 from schema import Schema, SchemaError
-from cp_validator.lib.controlador import main
+from cp_validator.root.controlador import main
 
 
 def cli():
