@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Estructura de los ficheros:
@@ -34,14 +33,7 @@ cod_via:            3
 descripcion_via:    20
 """
 
-import os
-
-__ppath__ = os.path.dirname(os.path.realpath(__file__))
-
-DIR_FILES = '{0}/files'.format(__ppath__)
-POSTAL_FILE = '{0}/POSTAL-t_0.txt'.format(DIR_FILES)
-VIA_FILE = '{0}/CODVIA_0.txt'.format(DIR_FILES)
-CIU_FILE = '{0}/CODCIU_0.txt'.format(DIR_FILES)
+from cp_validator.conf.settings import CIU_FILE, VIA_FILE, POSTAL_FILE
 
 def load_cius():
     """Carga la información relativa a localidad"""
@@ -64,11 +56,13 @@ def load_vias():
     return vias
 
 
-def load_postal(vias, cius):
+def get_postal():
     """Carga la información relativa a CP"""
 
-    postal = {}
+    cius = load_cius()
+    vias = load_vias()
 
+    postal = {}
     with open(POSTAL_FILE) as postal_handler:
         for reg in postal_handler:
 
@@ -117,14 +111,3 @@ def load_postal(vias, cius):
                 postal[cod_postal].append(post)
 
     return postal
-
-def main():
-    """Controlador"""
-
-    postal = load_postal(load_vias(), load_cius())
-
-    return None
-
-
-if __name__ == '__main__':
-    main()
