@@ -1,12 +1,9 @@
-#!flask/bin/python
+# -*- coding: utf-8 -*-
 """
 RESTful API
 """
 from flask import Flask, jsonify, abort, make_response, url_for
-from cp_validator.root.extractor import get_postal
-
-postals = get_postal()
-app = Flask(__name__)
+from cp_validator import app, postals
 
 
 @app.route('/cp/api/v1.0/codigos', methods=['GET'])
