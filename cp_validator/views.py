@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-RESTful API
+REST API
 """
 from flask import Flask, jsonify, abort, make_response, url_for
 from cp_validator import app, postals
@@ -20,6 +20,8 @@ def get_cp(codigo):
 
 def public_urls(postals):
     for codigo, data in postals.items():
+        if isinstance(postals[codigo], dict):
+            continue
         postals[codigo] = {'uri': url_for('get_cp',
                                           codigo=codigo,
                                           _external=True),
@@ -30,7 +32,3 @@ def public_urls(postals):
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({'error': 'CP no encontrado'}), 404)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
