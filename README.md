@@ -29,12 +29,12 @@ Devuelve todos los códigos postales
 Devuelve los datos específicos para un código concreto.
 
 ```bash
-$ curl -i http://127.0.0.1:5000/cp/api/v1.0/codigos/29190
+$ curl -i http://localhost:5000/cp/api/v1.0/codigos/29190
 HTTP/1.0 200 OK
 Content-Type: application/json
-Content-Length: 666
+Content-Length: 663
 Server: Werkzeug/0.11.13 Python/3.5.2
-Date: Fri, 30 Dec 2016 17:53:15 GMT
+Date: Fri, 30 Dec 2016 23:03:27 GMT
 
 {
   "29190": {
@@ -51,7 +51,7 @@ Date: Fri, 30 Dec 2016 17:53:15 GMT
         "inf_impar_superior": null,
         "inf_par_inferior": null,
         "inf_par_superior": null,
-        "localidad": "SIN_DATOS",
+        "localidad": "MALAGA",
         "nombre_via": "AGAPANTO",
         "par_inferior": "0002",
         "par_superior": "9998",
