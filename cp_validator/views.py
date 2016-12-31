@@ -2,13 +2,23 @@
 """
 REST API
 """
-from flask import Flask, jsonify, abort, make_response, url_for
+from flask import jsonify, abort, make_response, url_for
 from cp_validator import app, postals
+
+
+@app.before_first_request
+def public_urls():
+    for codigo, data in postals.items():
+        postals[codigo] = {'uri': url_for('get_cp',
+                                          codigo=codigo,
+                                          _external=True),
+                           'data': data}
+    return None
 
 
 @app.route('/cp/api/v1.0/codigos', methods=['GET'])
 def get_postals():
-    return jsonify({'codigos': public_urls(postals)})
+    return jsonify({'codigos': postals})
 
 
 @app.route('/cp/api/v1.0/codigos/<codigo>', methods=['GET'])
@@ -16,17 +26,6 @@ def get_cp(codigo):
     if codigo not in postals:
         abort(404)
     return jsonify({codigo: postals[codigo]})
-
-
-def public_urls(postals):
-    for codigo, data in postals.items():
-        if isinstance(postals[codigo], dict):
-            continue
-        postals[codigo] = {'uri': url_for('get_cp',
-                                          codigo=codigo,
-                                          _external=True),
-                           'data': data}
-    return postals
 
 
 @app.errorhandler(404)
