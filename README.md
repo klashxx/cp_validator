@@ -8,8 +8,50 @@ Los ficheros fuente **de muestra** están publicados por **Correos España** en 
 
 :warning: **IMPORTANTE** :warning::  la `BD` completa es **privativa y de pago** :broken_heart:. Su uso exige la suscripción un [contrato](http://www.correos.es/ss/Satellite/site/aplicacion-1349169614869-1363189730359/detalle_app-sidioma=es_ES).
 
-## Instalación
+## Instalación y ejecución
 
+Es recomendable generar un entorno de pruebas mediante `virtualenv` preferiblemente bajo `python3`.
+
+Obtenemos e instalamos el paquete:
+```bash
+pip install virtualenv
+```
+
+Generamos el entorno:
+```bash
+virtualenv -p python3 vp3
+```
+
+Lo activamos:
+```bash
+source vp3/bin/activate
+```
+
+ Clonamos el *repo*:
+```bash
+git clone https://github.com/klashxx/cp_validator.git
+```
+
+Nos situamos en la carpeta del proyecto:
+```bash
+cd cp_validator/
+```
+
+Exportamos las variables de entorno asociadas a **Flask**
+```bash
+export FLASK_APP=cp_validator
+export FLASK_DEBUG=true
+```
+
+Instalamos la aplicación:
+```bash
+pip install -e .
+```
+
+Y listos para lanzar el servicio :neckbeard: !!
+```bash
+flask run
+```
 
 ## Métodos
 
