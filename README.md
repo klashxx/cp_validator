@@ -64,7 +64,10 @@ Toda la información se recibe como **JSON**.
 
 ### <a name="codigos"></a>Códigos
 
-Devuelve todos los códigos postales
+Devuelve todos los códigos postales contenidos en el fichero `POSTAL.txt`.
+```bash
+$ curl -i http://localhost:5000/cp/api/v1.0/codigos
+```
 
 ### <a name="codigo"></a>Código
 
